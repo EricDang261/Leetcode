@@ -1,16 +1,15 @@
 class Solution {
+    // n = 5
     public int climbStairs(int n) {
-        int[] memo = new int[n+1]; // cache
-        return climbStairs_helper(0, n, memo);
-    }
-    
-    public int climbStairs_helper(int current, int n, int[]memo)
-    {
-        if(current > n) return 0;
-        if(current == n) return 1;
-        if(memo[current] != 0) return memo[current];
-        memo[current] =
-            climbStairs_helper(current + 1, n, memo) + climbStairs_helper(current + 2, n, memo);
-        return memo[current];
+       // bottom up approach
+        if(n < 2) return 1; // 1 step
+        int first = 1;
+        int second = 2; 
+        for(int i = 3; i <= n ; i++){
+            int third = first + second;
+            first = second; 
+            second = third;
+        }
+        return second;
     }
 }
