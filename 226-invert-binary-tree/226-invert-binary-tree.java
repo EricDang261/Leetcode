@@ -17,8 +17,8 @@ class Solution {
     public TreeNode invertTree(TreeNode root) {
         if(root == null )   return null;
         // node that holds all of the left node
-        TreeNode leftNode = invertTree(root.left);
-        TreeNode rightNode = invertTree(root.right);
+        invertTree(root.left);
+        invertTree(root.right);
         
         // swap nodes
         TreeNode tmp = root.left;
