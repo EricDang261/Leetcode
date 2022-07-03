@@ -15,16 +15,26 @@
  */
 class Solution {
     public TreeNode invertTree(TreeNode root) {
-        if(root == null )   return null;
-        // node that holds all of the left node
-        invertTree(root.left);
-        invertTree(root.right);
+        Queue<TreeNode> qu = new LinkedList<> ();
         
-        // swap nodes
-        TreeNode tmp = root.left;
-        root.left = root.right;
-        root.right = tmp; 
+        if(root == null) return null; // if it is null
+        qu.add(root);
         
+        // stop when queue is empty
+        while(!qu.isEmpty()){
+            // pop the queue and manipulate the node
+            TreeNode tmp = qu.poll();// should get node (4)
+            
+            // swap its children 
+            TreeNode swap = tmp.left;
+            tmp.left = tmp.right;
+            tmp.right = swap;
+            
+            // add back to the queue after swapping
+            if(tmp.left != null) qu.add(tmp.left);
+            if(tmp.right != null) qu.add(tmp.right);
+            
+        }
         return root;
     }
 }
