@@ -10,18 +10,11 @@
  */
 class Solution {
     public ListNode reverseList(ListNode head) {
-        if(head == null) return null;
+        if(head == null || head.next == null) return head;
         
-        ListNode current = head;
-        ListNode prev = null;
-        ListNode next = null;
-        
-        while(current != null){
-            next = current.next;
-            current.next = prev;
-            prev = current;
-            current = next;
-        }
-        return prev;
+        ListNode current = reverseList(head.next);
+        head.next.next = head;
+        head.next = null; // remove the old forward ptr
+        return current;
     }
 }
