@@ -12,9 +12,9 @@ class Codec:
         def dfs(node):
             if not node:
                 res.append("N")
-                return 
-            # pre-order traveral
-            res.append(str(node.val))
+                return
+
+            res.append(str(node.val)) 
             left = dfs(node.left)
             right = dfs(node.right)
         
@@ -23,27 +23,21 @@ class Codec:
 
 
 
-
-
     def deserialize(self, data):
         vals = data.split(",")
         self.i = 0
-
-        def dfs():
+        def helper():
             if vals[self.i] == "N":
                 self.i += 1
                 return None
-            node = TreeNode(int(vals[self.i]))
+            newNode =  TreeNode(int (vals[self.i]))
             self.i += 1
-            node.left = dfs()
-            node.right = dfs()
-            return node
+            newNode.left = helper()
+            newNode.right = helper()
+            return newNode
 
-        return dfs()
+        return helper()
 
-
-
-          
         
 
 # Your Codec object will be instantiated and called as such:
